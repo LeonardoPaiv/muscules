@@ -1,7 +1,7 @@
 package main
 
 import (
-	"muscules/controllers"
+	routers "muscules/Routers"
 	"muscules/initializers"
 
 	"github.com/gin-gonic/gin"
@@ -14,7 +14,9 @@ func init() {
 
 func main() {
 	r := gin.Default()
-	r.GET("/classificacao", controllers.ClassificacaoRead)
-	r.GET("/musculo-ativo", controllers.MusculoAtivoRead)
+	classificacao := r.Group("classificacao")
+	musculesAtivo := r.Group("musculo-ativo")
+	routers.RoutersClassificacao(classificacao)
+	routers.RoutersMusculoAtivo(musculesAtivo)
 	r.Run()
 }
